@@ -254,7 +254,7 @@
         [self.myHeader.priorMonth addTarget:self action:@selector(priorMonth:) forControlEvents:UIControlEventTouchUpInside];
         [self.myHeader.nextMonth addTarget:self action:@selector(nextMonth:) forControlEvents:UIControlEventTouchUpInside];
     }
-        return self.myHeader;
+    return self.myHeader;
 }
 
 - (void)nextMonth:(id)sender{
@@ -324,6 +324,7 @@
     self.selectedCell = cell;
     if (self.selectedNoteLabel && self.selectedNoteLabel.superview.superview != self.selectedCell) {
         self.selectedNoteLabel.layer.borderWidth = 0;
+        self.selectedNoteLabel = nil;
     }
     self.addTodoBtn.hidden = NO;
     self.addIconBtn.hidden = NO;
@@ -392,7 +393,7 @@
     if (!newToDoColorArray) {
         newToDoColorArray = [NSMutableArray array];
     }
-
+    
     ZZXCalendarNoteLabel *label = [[ZZXCalendarNoteLabel alloc]initWithFrame:CGRectMake(0, size.height, cell.bounds.size.width, 20)];
     label.delegate = self;
     label.noteLabel.text = text;
@@ -408,7 +409,7 @@
     [mutableDic setObject:newToDoArray forKey:kCellMarkNewToDoKey];
     [mutableDic setObject:newToDoColorArray forKey:kCellMarkNewToDoColorKey];
     [[TMCache sharedCache] setObject:mutableDic forKey:cell.cellMark];
-
+    
     cell.labelScrollView.contentSize = CGSizeMake(cell.bounds.size.width, CGRectGetMaxY(label.frame));
 }
 
@@ -419,7 +420,7 @@
     }else if([type isEqualToString:@"1"]){
         [self controlIcon:cell iconImageView:cell.bigSelectIcon iconName:iconName type:type];
     }
-
+    
 }
 
 - (void)controlIcon:(ZZXCalendarCollectionViewCell *)cell iconImageView:(UIImageView *)iconImageView iconName:(NSString *)iconName type:(NSString *)type{
